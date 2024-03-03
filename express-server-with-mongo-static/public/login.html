@@ -1,0 +1,28 @@
+<html>
+<head>
+    <script>
+        async function login() {
+            const userName = document.getElementById('userName').value;
+            const password = document.getElementById('password').value;
+            console.log(' login ==> userName =', userName, ' password ==>', password);
+
+            const response = await fetch('/api/login', {
+                method: "POST", // *GET, POST, PUT, DELETE, etc.
+                headers: {
+                    "Content-Type": "application/json",
+                    // 'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: JSON.stringify({userName, password}), // body data type must match "Content-Type" header
+            });
+            const data = await response.json();
+            console.log('data ==>', data);
+        }
+    </script>
+</head>
+<body>
+    <h1> login</h1>
+    <input type="text" id="userName" placeholder="username" /> <br>
+    <input type="password" id="password" placeholder="password" /> <br>
+    <button onclick="login()">Login</button>
+</body>
+</html>
