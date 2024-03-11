@@ -1,12 +1,29 @@
-module.exports = function login (req, res) {
+const performLogin = (userName, password) => {
+    if (isValidUser(userName, password)) {
+        return 'log in success';
+    } else {
+        return 'login failure';
+    }
+}
+
+const login = (req, res) => {
     console.log('req.body', req.body);
-    if(req.body.userName === "admin" && req.body.password === "admin")
+    const result= performLogin(req.body.userName , req.body.password);
+    res.send(result);
+}
+
+function isValidUser(userName, password){
+    if(userName === "admin" && password === "admin")
     {
-        res.send('log in success')
+        return true;
     }
     else
     {
-        res.status(401);
-        res.send('login failure');
+        return false;
     }
+}
+
+module.exports = {
+    login,
+    performLogin,
 }
