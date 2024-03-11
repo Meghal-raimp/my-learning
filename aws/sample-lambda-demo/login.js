@@ -13,14 +13,7 @@ const login = (req, res) => {
 }
 
 function isValidUser(userName, password){
-    if(userName === "admin" && password === "admin")
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    return userName === "admin" && password === "admin";
 }
 
 module.exports = {
