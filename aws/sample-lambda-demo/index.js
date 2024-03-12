@@ -1,14 +1,13 @@
-const express = require('express')
-const app = express()
-const port = 3000
-app.use(express.json());
-const login = require('./login.js');
-app.get('/', (req, res) => {
-    res.send('Hello World!')
-})
+const performLogin= require('./login');
 
-app.post('/',  login.login)
+const handler = async (event) => {
+    const {userName, password} = event;
+    const result = performLogin(userName, password);
+    const response = {
+        statusCode: 200,
+        body: result,
+    };
+    return response;
+};
 
-app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`);
-})
+exports.handler = handler;
