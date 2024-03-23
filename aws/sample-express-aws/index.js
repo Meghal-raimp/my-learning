@@ -23,8 +23,7 @@ app.get('/', (req, res) => {
 })
 
 app.post('/', async (req, res) => {
-    const userName =  req.body.userName;
-    const password =  req.body.password;
+    const { userName, password } =  req.body;
     const params = {
         TableName: tableName,
         Key: {
@@ -34,7 +33,7 @@ app.post('/', async (req, res) => {
 
     try {
         const data = await docClient.get(params).promise();
-        if (data.Item?.userName === userName && data.Item?.password === password) {
+        if (data.Item?.password === password) {
             res.send('log in success')
         } else {
             res.status(401);
