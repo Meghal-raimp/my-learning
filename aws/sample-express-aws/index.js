@@ -34,7 +34,6 @@ app.post('/', async (req, res) => {
 
     try {
         const data = await docClient.get(params).promise();
-        console.log('data ==>', data);
         if (data.Item?.userName === userName && data.Item?.password === password) {
             res.send('log in success')
         } else {
